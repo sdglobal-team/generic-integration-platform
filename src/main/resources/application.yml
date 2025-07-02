@@ -1,0 +1,56 @@
+# Application name
+spring:
+  application:
+    name: generic-integration
+
+  data:
+    arangodb:
+      host: localhost
+      port: 8529
+      user: root
+      password: root
+      database: file_integration
+
+server:
+  port: 8080
+
+# Integration configuration
+integration:
+  inbound-folder: data/inbound
+  outbound-folder: data/outbound
+  error-folder: data/error
+  processed-folder: data/processed
+  kafka-topic: file-data #need to put your kafka topic
+#  kafka-brokers: //need to put your broker
+
+
+# Camel and Kafka configuration
+camel:
+  springboot:
+    name: GenericIntegrationCamel
+  component:
+    kafka:
+      #      brokers: //need to put your broker
+      security-protocol: SASL_SSL
+      sasl-mechanism: PLAIN
+      sasl-jaas-config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule
+        required
+      #        username="username"
+      #        password="password";
+      ssl-endpoint-identification-algorithm: https
+
+# Logging levels
+logging:
+  level:
+    com.police: DEBUG
+    org.apache.camel: INFO
+
+# Actuator management
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+
