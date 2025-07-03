@@ -8,7 +8,7 @@ spring:
       host: localhost
       port: 8529
       user: root
-      password: root
+#      password: your db password
       database: file_integration
 
 server:
@@ -20,9 +20,12 @@ integration:
   outbound-folder: data/outbound
   error-folder: data/error
   processed-folder: data/processed
-  kafka-topic: file-data #need to put your kafka topic
-#  kafka-brokers: //need to put your broker
-
+#  kafka-topic: your kafka topic
+#  kafka-brokers: your kafka broker
+#  s3-bucket: your bucket name like file-base bucket
+#  s3-accessKey: your access key related to bucket and server
+#  s3-secretKey: your security key related to bucket and server
+#  s3-endpoint:  your file-base endpoint like https://s3.filebase.com
 
 # Camel and Kafka configuration
 camel:
@@ -30,14 +33,14 @@ camel:
     name: GenericIntegrationCamel
   component:
     kafka:
-      #      brokers: //need to put your broker
+#      brokers: your kafka broker
       security-protocol: SASL_SSL
       sasl-mechanism: PLAIN
       sasl-jaas-config: >
         org.apache.kafka.common.security.plain.PlainLoginModule
         required
-      #        username="username"
-      #        password="password";
+#        username="Your online kafka server username"
+#        password="Your online kafka server password";
       ssl-endpoint-identification-algorithm: https
 
 # Logging levels

@@ -47,6 +47,18 @@ public class InboundFileRoute extends RouteBuilder {
         //         .log("Picked up S3 file: ${header.CamelFileName}")
         //         .to("direct:commonProcess");
 
+        from("aws2-s3://file-event?amazonS3Client=#s3Client&deleteAfterRead=true&includeBody=true")
+                .routeId("s3-filebase-inbound")
+                .log("Picked up file from Filebase S3: ${header.CamelAwsS3Key}")
+                .process(exchange -> {
+                    String s3Key = exchange.getIn().getHeader("CamelAwsS3Key", String.class);
+                    if (s3Key != null) {
+                        exchange.getIn().setHeader("CamelFileName", s3Key);
+                    }
+                })
+                .to("direct:commonProcess");
+
+
         /*
          * Common Process route
          */

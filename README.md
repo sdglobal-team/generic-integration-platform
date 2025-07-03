@@ -13,6 +13,7 @@ This is a proof of concept for a generic file integration platform using:
 3. Kafka used for decoupling producer/consumer
 4. Spring Data ArangoDB to store records
 5. Outbound file generation from ArangoDB
+6. Online file-based sources for inbound files
 
 ## Tech Stack
 
@@ -25,8 +26,11 @@ This is a proof of concept for a generic file integration platform using:
 
 ## Flow Overview
 
-1. Drop files into `data/inbound` folder.
-   - Supports CSV, JSON, XML
+1. Inbound file support from:
+
+   1.1 Local data/inbound folder
+
+   1.2 Online file sharing services (Filebase server)
 2. Camel picks up the files and transforms them to JSON
 3. JSON data is published to Kafka topic `file-data`
 4. Camel consumer reads from Kafka and stores records into ArangoDB
@@ -47,3 +51,14 @@ This is a proof of concept for a generic file integration platform using:
 ## Sample File Formats
 
 Added in file structure folder.
+
+## File-based Online Sources
+1. Filebase: S3-compatible decentralized object storage platform.
+
+2. You Can Just SignUp and Create Credentials And then create buckets and upload files via the Filebase web console.
+
+3. Public access can be configured to generate pre-signed URLs for your files.
+
+4. Apache Camel can connect to Filebase buckets using the standard S3 component with your Filebase access key and secret key.
+
+5. Filebase is compatible with existing AWS SDKs and tools, so you can seamlessly switch from Amazon S3 to Filebase for storing and retrieving files.

@@ -32,7 +32,9 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<camel.version>4.2.0</camel.version>
+<!--		<camel.version>4.2.0</camel.version>-->
+		<camel.version>3.20.5</camel.version>
+
 	</properties>
 
 	<dependencies>
@@ -87,11 +89,23 @@
 		</dependency>
 
 		<!-- JAXB Runtime implementation -->
+<!--		<dependency>-->
+<!--			<groupId>org.glassfish.jaxb</groupId>-->
+<!--			<artifactId>jaxb-runtime</artifactId>-->
+<!--			<version>4.0.3</version>-->
+<!--		</dependency>-->
+		<!-- JAXB for Java 17 compatibility -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>4.0.3</version>
+			<version>2.3.6</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
@@ -110,6 +124,13 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-aws2-s3-starter</artifactId>
+			<version>3.20.5</version>
+		</dependency>
+
 
 	</dependencies>
 
