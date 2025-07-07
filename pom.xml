@@ -59,6 +59,12 @@
 
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-http-starter</artifactId>
+			<version>3.20.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-kafka-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
@@ -82,11 +88,11 @@
 		</dependency>
 
 		<!-- JAXB API -->
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>4.0.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>jakarta.xml.bind</groupId>-->
+<!--			<artifactId>jakarta.xml.bind-api</artifactId>-->
+<!--			<version>4.0.0</version>-->
+<!--		</dependency>-->
 
 		<!-- JAXB Runtime implementation -->
 <!--		<dependency>-->
@@ -132,7 +138,33 @@
 		</dependency>
 
 
+<!--		by nitish-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-csv</artifactId>
+			<version>3.20.5</version>
+		</dependency>
+
+
 	</dependencies>
+	<!--		by nitish-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2021.0.9</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 
 	<build>
 		<plugins>

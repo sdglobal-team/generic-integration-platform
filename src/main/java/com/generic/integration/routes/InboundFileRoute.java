@@ -1,6 +1,8 @@
 package com.generic.integration.routes;
 
+import com.generic.integration.feignclient.CityCsvClient;
 import com.generic.integration.model.FileRecordCsv;
+import com.generic.integration.processor.CityCSVProcessor;
 import com.generic.integration.service.ArangoService;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
@@ -13,6 +15,11 @@ public class InboundFileRoute extends RouteBuilder {
 
     @Autowired
     ArangoService arangoService;
+
+    @Autowired
+    CityCsvClient cityCsvClient;
+    @Autowired
+    CityCSVProcessor cityCSVProcessor;
 
     @Override
     public void configure() throws Exception {
@@ -120,5 +127,21 @@ public class InboundFileRoute extends RouteBuilder {
                     arangoService.saveProcessedFile(fileName, "xml");
                 })
                 .log("XML processing complete");
+
+        from("direct:fetch-and-store-cities")
+                .routeId("city-data-route")
+                .log("🚀 Fetching city CSV...")
+
+                .process(exchange -> {
+                    String csv = cityCsvClient.downloadCityCsv().getBody();
+                    exchange.getIn().setBody(csv);
+                })
+
+                .unmarshal().csv()
+                .split(body()).streaming()
+                .process(cityCSVProcessor)
+
+                .log("✅ City data processing complete.");
     }
+
 }

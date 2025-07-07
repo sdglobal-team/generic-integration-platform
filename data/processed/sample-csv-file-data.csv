@@ -1,6 +1,0 @@
-fileId,fileName,fileType,fileSize,createdBy,createdDate
-F001,employee-records.csv,csv,2048,admin,2025-06-29
-F002,invoice-2025.pdf,pdf,524288,finance,2025-06-28
-F003,customer-list.json,json,1024,sales,2025-06-27
-F004,policy-documents.xml,xml,8192,legal,2025-06-25
-F013,policy-documents.xml,xml,81934,Pharma,2025-08-23
